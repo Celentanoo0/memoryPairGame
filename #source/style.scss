@@ -17,53 +17,88 @@
 
 .cards-container{
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    max-width: 800px;
-    max-height: 800px;
+    padding: 0 50px;
+}
+
+.flipper{
+    perspective: 1000px;
+}
+.flipper.flip .card {
+	transform: rotateY(180deg);
+}
+.card__back, .card__front{
+    backface-visibility: hidden;
+	position: absolute;
+    left: 50px;
+    top: 65px;
 }
 
 .card{
     border: 2px solid rgb(120, 120, 120);
     border-radius: 10px;
-    flex: 0 1 25%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 30px 0;
-    min-height: 180px;
-    &__img{
+    height: 180px;
+    width: 200px;
+    transition: 0.6s;
+	transform-style: preserve-3d;
+	position: relative;
+    &__front{
+        transform: rotateY(180deg);
         width: 100px;
         img{
             max-width: 100%;
         }
     }
+    &__back{
+        z-index: 2;
+	    transform: rotateY(0deg);
+    }
 }
 
-@media (max-width: 860px){
+@media (max-width: 867px){
+    .card{
+        height: 120px;
+        width: 150px;
+        &__front{
+            width: 50px;
+        }
+    }
+    .card__back, .card__front{
+        left: 50px;
+        top: 45px;
+    }
+}
+
+@media (max-width: 684px){
+    .cards-container{
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .card{
+        height: 150px;
+        width: 180px;
+        &__front{
+            width: 90px;
+        }
+    }
     .header{
         margin: 30px 0;
-        font-size: 25px;
-    }
-    .cards-container{
-        margin: 0 40px;
-        max-width: 500px;
-    }
-    .card{
-        padding: 20px 30px;
     }
 }
 
-@media (max-width: 408px){
-    .header{
-        margin: 20px 0;
-        font-size: 20px;
+@media (max-width: 450px){
+    .card{
+        height: 115px;
+        width: 135px;
+        &__front{
+            width: 65px;
+        }
     }
     .cards-container{
-        max-width: 300px;
+        margin: 0 0 40px 0;
     }
-    .card{
-        padding: 10px 20px;
+    .card__back, .card__front{
+        left: 35px;
+        top: 40px;
     }
 }
