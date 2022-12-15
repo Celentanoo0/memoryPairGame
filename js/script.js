@@ -3,24 +3,34 @@
 const cards = Array.from(document.querySelectorAll(".flipper"));
 const cardsImg = Array.from(document.querySelectorAll(".card__front img"));
 const selectedCards = [];
-const selectedFlippers = [];
+
 for (const elem of cards) {
-    elem.addEventListener("click", function slider(e) {
-        if (selectedCards.length < 2) {
-            elem.classList.toggle("flip");
-            selectedCards.push(e.target);
-        }
-        if(selectedCards.length >= 2){
-            if(selectedCards[0].querySelector('img').src === selectedCards[1].querySelector('img').src){
-                selectedCards.forEach(item => item.classList.toggle('solved'))
-                selectedCards.length = 0;
-            }
-            else setTimeout(() => {
-                selectedCards.forEach(item => item.closest('.flipper').classList.toggle("flip"))
-                selectedCards.length = 0;
-            }, 1000);
-        }
-    });
+    elem.addEventListener("click", slider);
+}
+
+function slider(e){
+    if(selectedCards.length < 2){
+        e.target.closest('.flipper').classList.toggle("flip");
+        selectedCards.push(e.target);
+        e.target.closest('.flipper').removeEventListener('click', slider);
+    }
+    if(selectedCards.length >= 2){
+        checkout();
+    }
+}
+
+function checkout(){
+    if(selectedCards[0].querySelector('img').src === selectedCards[1].querySelector('img').src){
+        selectedCards.forEach(item => item.classList.toggle('solved'))
+        selectedCards.length = 0;
+    }
+    else setTimeout(() => {
+        selectedCards.forEach((item) => {
+            item.closest('.flipper').classList.toggle("flip");
+            item.closest('.flipper').addEventListener("click", slider);
+        })
+        selectedCards.length = 0;
+    }, 1000);
 }
 
 const shuffleArray = (array) => {
