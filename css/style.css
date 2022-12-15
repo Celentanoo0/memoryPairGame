@@ -79,6 +79,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .header {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   margin: 0 0 40px 0;
   font-size: 30px;
   font-weight: 700;
@@ -117,6 +121,10 @@ h1, h2, h3, h4, h5, h6 {
 .card__front {
   transform: rotateY(180deg);
   width: 100px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 .card__front img {
   max-width: 100%;
@@ -124,6 +132,10 @@ h1, h2, h3, h4, h5, h6 {
 .card__back {
   z-index: 2;
   transform: rotateY(0deg);
+}
+
+.card.solved {
+  visibility: hidden;
 }
 
 @media (max-width: 867px) {
